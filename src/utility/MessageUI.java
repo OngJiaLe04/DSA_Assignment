@@ -19,7 +19,7 @@ public class MessageUI {
     }
     
     public static void message_error_InputOutOfRange(int max_range){
-        System.out.println("Invalid Choice. Please enter a number between 1 to " + max_range + ".");
+        System.out.println("Invalid Choice. Please enter a number between 1 to " + max_range + "..");
         message_warning_TryAgain();
     }
     
