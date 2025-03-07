@@ -18,7 +18,7 @@ public class LoginUI {
     private Account account = new Account();
     
     public boolean getLoginUI(String user){
-        System.out.println("Sign In as " + user);
+        System.out.println("\nSign In as " + user);
         System.out.println("===================");
         
         System.out.print("Email Address: ");

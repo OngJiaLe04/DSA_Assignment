@@ -14,9 +14,11 @@ import adt.ListInterface;
 import boundary.MainMenuUI;
 import utility.ScreenUI;
 import control.AccountRegisterControl;
+import control.LoginControl;
 
 public class MainMenuControl {
     MainMenuUI mainMenuUI = new MainMenuUI();
+    LoginControl loginControl = new LoginControl();
     ScreenUI screenUI = new ScreenUI();
     
     public MainMenuControl(){
@@ -41,7 +43,7 @@ public class MainMenuControl {
                     break;
                 case 3:
                     screenUI.clearScreen();
-                    System.out.println("Logging as Employer...");
+                    loginControl.runLogin("Employer");
                     screenUI.systemPause();
                     break;
                 case 4:

@@ -44,7 +44,7 @@ public class MessageUI {
     }
     
     public static void message_error_loginFailed(){
-        System.out.println("Login Fail! Invalid Email or Password...");
+        System.out.println("\nLogin Fail! Invalid Email or Password...");
         message_warning_TryAgain();
     }
     
