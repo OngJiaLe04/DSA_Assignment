@@ -26,4 +26,12 @@ public class ScreenUI {
         System.out.println("Press Any Key To Continue...");
         pause.nextLine();
     }
+    
+    public static void backToPrevious(String input) {
+        if (input.equalsIgnoreCase("back")) {
+//            System.out.println("\nReturning to Main Menu...");
+            throw new BackToPreviousException(); // Custom exception to stop registration
+        }
+    }
+
 }

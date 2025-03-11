@@ -11,48 +11,68 @@ package boundary;
 
 import entity.Account;
 import java.util.Scanner;
+import utility.BackToPreviousException;
 import utility.MessageUI;
+import utility.ScreenUI;
 
 public class AccountRegisterUI {
     private Scanner scanner = new Scanner(System.in);
     Account account = new Account();
     MessageUI messageUI = new MessageUI();
+    ScreenUI screenUI = new ScreenUI();
     
-    boolean isValidEmail = false;
-    boolean isValidPassword = false;
-    String email = "";
-    String password = "";
+    public Account getAccountRegisterUI(String userType){
+        boolean isValidEmail = false;
+        boolean isDuplicateEmail = true;
+        boolean isValidPassword = false;
+        String email = "";
+        String password = "";
     
-    public Account getAccountRegisterUI(){
         System.out.println("Register an Account");
         System.out.println("=======================");
         
-        while(!isValidEmail){
-            System.out.print("Email Address: ");
-            email = scanner.nextLine();
-            isValidEmail = account.isValidEmail(email);
-            if(!isValidEmail){
-                messageUI.message_error_invalidEmail();
+        try{
+            while(!isValidEmail && isDuplicateEmail){
+                System.out.print("Email Address: ");
+                email = scanner.nextLine();
+                screenUI.backToPrevious(email);
+
+                isValidEmail = account.isValidEmail(email);
+                if(!isValidEmail){
+                    messageUI.message_error_invalidEmail();
+                }else{
+                    isDuplicateEmail = account.isDupulicateEmail(email);
+                    if(isDuplicateEmail){
+                        isValidEmail = false;
+                        messageUI.message_error_duplicateEmail();
+                    }
+                }
             }
+        
+            while(isValidEmail && !isDuplicateEmail && !isValidPassword){
+                System.out.print("Password: ");
+                password = scanner.nextLine();
+                screenUI.backToPrevious(password);
+                
+                isValidPassword = account.isValidPassword(password);
+                if(!isValidPassword){
+                    messageUI.message_error_invalidPassword();
+                }
+            }
+            
+        }catch(BackToPreviousException e){
+            messageUI.message_information_backToPrevious("Registration");
+            return null;
         }
         
-        while(isValidEmail && !isValidPassword){
-            System.out.print("Password: ");
-            password = scanner.nextLine();
-            isValidPassword = account.isValidPassword(password);
-            if(!isValidPassword){
-                messageUI.message_error_invalidPassword();
-            }
-        }
-        
-        if(isValidEmail && isValidPassword){
+        if(isValidEmail && !isDuplicateEmail && isValidPassword){
             account.setEmail(email);
             account.setPassword(password);
-            account.setUserType("Test");
+            account.setUserType(userType);
             
             return account;
+        }else{
+            return null;
         }
-        
-        return null;
     }
 }

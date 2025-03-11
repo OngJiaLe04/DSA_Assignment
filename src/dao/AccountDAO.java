@@ -80,8 +80,8 @@ public class AccountDAO {
         try(BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))){
             String line;
             while((line = reader.readLine()) != null){
-                String[] data = line.split(",");
-                if(data.length > 1 && data[1].equalsIgnoreCase(email)){
+                String[] data = line.split("\\|");
+                if(data.length > 1 && data[1].trim().equalsIgnoreCase(email.trim())){
                     results.add(line);
                 }
             }
@@ -98,8 +98,8 @@ public class AccountDAO {
         try(BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))){
             String line;
             while((line = reader.readLine()) != null){
-                String[] data = line.split(",");
-                if(data.length > 0 && data[0].equalsIgnoreCase(accountID)){
+                String[] data = line.split("\\|");
+                if(data.length > 0 && data[0].trim().equalsIgnoreCase(accountID.trim())){
                     results.add(line);
                 }
             }
@@ -110,12 +110,12 @@ public class AccountDAO {
         return results.isEmpty() ? null : results;
     }
     
-    public static void main(String[] args){
-        AccountDAO dao = new AccountDAO();
-        ListInterface array = new ArrayList<>();
-        dao.createFile();
-        dao.insert_account("jiale04@gmail.com,Password123,Employer");
-        array = dao.search_account_by_email("jiale04@gmail.com");
-        System.out.println(array);
-    }
+//    public static void main(String[] args){
+//        AccountDAO dao = new AccountDAO();
+//        ListInterface array = new ArrayList<>();
+//        dao.createFile();
+//        dao.insert_account("jiale04@gmail.com,Password123,Employer");
+//        array = dao.search_account_by_email("jiale04@gmail.com");
+//        System.out.println(array);
+//    }
 }

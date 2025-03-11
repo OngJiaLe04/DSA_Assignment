@@ -17,18 +17,19 @@ public class LoginControl {
     LoginUI loginUI = new LoginUI();
     MessageUI messageUI = new MessageUI();
     ScreenUI screenUI = new ScreenUI();
-    boolean login_success = false;
+    String account_ID = null;
     
-    public void runLogin(String userType){
+    public String runLogin(String userType){
         do{ 
-            login_success = loginUI.getLoginUI("Employer");
-            if(!login_success){
+            account_ID = loginUI.getLoginUI(userType);
+            if(account_ID == null){
                 messageUI.message_error_loginFailed();
                 screenUI.clearScreen();
             }
-        }while(!login_success);
+        }while(account_ID == null);
         
-        System.out.println("Welcome");
+        messageUI.message_success_loginAccount();
+        return account_ID;
     }
     
 //    public static void main(String[] args){

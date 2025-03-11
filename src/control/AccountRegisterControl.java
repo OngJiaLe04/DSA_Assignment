@@ -20,23 +20,29 @@ public class AccountRegisterControl {
     AccountDAO accDAO = new AccountDAO();
     Account account = new Account();
     
-    public void runAccountRegister(){
-        account = accountRegister_UI.getAccountRegisterUI();
+    public Account runAccountRegister(String userType){
+        account = accountRegister_UI.getAccountRegisterUI(userType);
+        
         if(account != null){
             String accountID = account.generateAccountID();
-            String data = accountID + "," + account.getEmail() + "," + account.getPassword() + "," + account.getUserType();
+            account.setAccountID(accountID);
+            String data = accountID + "|" + account.getEmail() + "|" + account.getPassword() + "|" + account.getUserType();
             boolean success = accDAO.insert_account(data);
             if(success){
                 messageUI.message_success_createAccount();
             }else{
                 messageUI.message_error_createAccount();
             }
+        }else{
+            
+            return null;
         }
         
+        return account!=null? account : null;
     }
     
-    public static void main(String[] args){
-        AccountRegisterControl test = new AccountRegisterControl();
-        test.runAccountRegister();
-    }
+//    public static void main(String[] args){
+//        AccountRegisterControl test = new AccountRegisterControl();
+//        test.runAccountRegister();
+//    }
 }

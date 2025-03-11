@@ -1,1 +1,9 @@
-A0001,ongjiale04@gmail.com,Jialeong54321?,Test
+A0001|ongjiale04@gmail.com|Jialeong54321?|Employer
+A0002|jiale04@gmail.com|Jialeong54321@|Employer
+A0003|testing@gmail.com|Testing123?|Employer
+A0004|testing1@gmail.com|Testing123@|Applicant
+A0005|abc@gmail.com|Abcd1234@|Applicant
+A0006|zoelee@gmail.com|Zoelee12345@|Employer
+A0007|testing1@gmail.com|Testing123@|Applicant
+A0008|iaij@gmail.com|Jialeong54321?|Employer
+A0009|zoe@gmail.com|Zoe54321?|Employer

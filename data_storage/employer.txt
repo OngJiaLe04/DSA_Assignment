@@ -1,4 +1,3 @@
-1,Alice,User
-2,Bob,jiale
-3,Charlie,Employer
-4,OMG,SMM
+E0001|Zoe Lee|zoe lee's business|Jalan Zoe, 34180 Georgetown, Pulau Pinang|1234567890|A0006
+E0002|testing1|Business example|business road, Jalan ABC Georgetown, Penang|0987654321|A0007
+E0003|Zoe Lee|Business Zoe|343ABC Zoe Road, Penang|1234567890|A0009

@@ -17,8 +17,8 @@ public class LoginUI {
     private Scanner scanner = new Scanner(System.in);
     private Account account = new Account();
     
-    public boolean getLoginUI(String user){
-        System.out.println("\nSign In as " + user);
+    public String getLoginUI(String userType){
+        System.out.println("\nSign In as " + userType);
         System.out.println("===================");
         
         System.out.print("Email Address: ");
@@ -27,8 +27,9 @@ public class LoginUI {
         System.out.print("Password: ");
         String password = scanner.nextLine();
         
-        boolean success = account.isValidLogin(email, password);
-        return success;
+        String account_ID = account.isValidLogin(email, password, userType);
+        
+        return account_ID;
     }
 //    public static void main(String[] args){
 //        LoginUI test = new LoginUI();

@@ -82,20 +82,30 @@ public class Account {
         return Pattern.matches(PASSWORD_REGEX, password);
     }
     
-    public boolean isValidLogin(String email, String password){
+    public String isValidLogin(String email, String password, String userType){
         boolean success_login = false;
         
         String account_ID = "";
         
-        account_ID = isValidLogin_email(email);
+        account_ID = isValidLogin_email(email, userType);
         if(account_ID != null){
             success_login = isValidLogin_password(account_ID, password);
-        }else{
-            return false;
         }
         
-        return success_login;
+        return success_login==true? account_ID : null;   
+    }
+    
+    public boolean isDupulicateEmail(String email){
+        ListInterface<String> accList = new ArrayList<>();
+        AccountDAO accDAO = new AccountDAO();
+        boolean isDuplicateEmail = false;
         
+        accList = accDAO.search_account_by_email(email);
+        if(accList != null){
+            isDuplicateEmail = true;
+        }
+        
+        return isDuplicateEmail;
     }
     
     public void displayAccount(){
@@ -105,17 +115,19 @@ public class Account {
         System.out.println("User Type: " + userType);
     }
     
-    private String isValidLogin_email(String email){
+    private String isValidLogin_email(String email, String userType){
         AccountDAO accDAO = new AccountDAO();
         ListInterface<String> accountList = new ArrayList<>();
         String account_info = "";
         
         accountList = accDAO.search_account_by_email(email);
         if(accountList != null){
-//            System.out.println(accountList.get(0));
             account_info = accountList.get(0);
-            String[] data = account_info.split(",");
-            return data[0]; // account_ID
+            String[] data = account_info.split("\\|");
+//            boolean isValid_userType = userType.equalsIgnoreCase(data[3])? true : false;
+            if(userType.equalsIgnoreCase(data[3])){
+                return data[0]; // account_ID
+            }
         }
         
         return null;
@@ -130,7 +142,7 @@ public class Account {
         accountList = accDAO.search_account_by_accountID(accountID);
         if(accountList != null){
             account_info = accountList.get(0);
-            String[] data = account_info.split(",");
+            String[] data = account_info.split("\\|");
             String acc_password = data[2];
             
             if(acc_password.equals(password)){

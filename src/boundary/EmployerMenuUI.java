@@ -4,28 +4,28 @@
  */
 package boundary;
 
+
 /**
  *
  * @author ongji
  */
-import utility.ScreenUI;
-import utility.MessageUI;
+
 import java.util.Scanner;
+import utility.MessageUI;
+import utility.ScreenUI;
 
-
-public class MainMenuUI {
-    private static String[] mainMenuOptions = {"Login as a Guest", "Login as Job Seeker", "Login as Employer", "Register as a Job Seeker", "Register as a Employer", "Exit"};
+public class EmployerMenuUI {
+    private static String[] employerMenuOptions = {"My Profile", "Edit the Profile", "Log out"};
     Scanner scanner = new Scanner(System.in);
     ScreenUI screenUI = new ScreenUI();
     MessageUI messageUI = new MessageUI();
     
-    public int getMainMenu(){
+    public int getEmployerMenuUI(){
         int input = -1;
-        screenUI.clearScreen();
-        System.out.println("=== Internship Application System ===\n");
-
-        for (int i = 0; i < mainMenuOptions.length; i++) {
-            System.out.println(i+1 + ". " + mainMenuOptions[i]);
+        System.out.println("=== Employer Menu System ===\n");
+        
+        for(int i = 0; i < employerMenuOptions.length; i++){
+            System.out.println(i+1 + ". " + employerMenuOptions[i]);
         }
         
         System.out.print("\nSelect an option: ");
@@ -34,10 +34,10 @@ public class MainMenuUI {
         try{
             input = Integer.parseInt(userInput);
             
-            if(input >= 1 && input <= mainMenuOptions.length){
+            if(input >= 1 && input <= employerMenuOptions.length){
                 return input;
             }else{
-                messageUI.message_error_InputOutOfRange(mainMenuOptions.length);
+                messageUI.message_error_InputOutOfRange(employerMenuOptions.length);
             }
             
         }catch(NumberFormatException e){
